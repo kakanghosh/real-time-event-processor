@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "NewMessageEvent",
+  "namespace": "com.example.dto.kafka",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "type",
+      "type": "string"
+    },
+    {
+      "name": "body",
+      "type": "string"
+    }
+  ]
+}
+

@@ -1,0 +1,3 @@
+spring:
+  kafka:
+    consumer-group: new_message_event_group
