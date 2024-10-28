@@ -14,13 +14,16 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -7956180195852507048L;
+  private static final long serialVersionUID = 2906748186841476025L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewMessageEvent\",\"namespace\":\"com.example.dto.kafka\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"body\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewMessageEvent\",\"namespace\":\"com.example.dto.kafka\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"body\",\"type\":\"string\"},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"},\"default\":0}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
+  static {
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
+  }
 
   private static final BinaryMessageEncoder<NewMessageEvent> ENCODER =
       new BinaryMessageEncoder<NewMessageEvent>(MODEL$, SCHEMA$);
@@ -76,6 +79,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
   private java.lang.CharSequence id;
   private java.lang.CharSequence type;
   private java.lang.CharSequence body;
+  private java.time.Instant createdAt;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -89,11 +93,13 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
    * @param id The new value for id
    * @param type The new value for type
    * @param body The new value for body
+   * @param createdAt The new value for createdAt
    */
-  public NewMessageEvent(java.lang.CharSequence id, java.lang.CharSequence type, java.lang.CharSequence body) {
+  public NewMessageEvent(java.lang.CharSequence id, java.lang.CharSequence type, java.lang.CharSequence body, java.time.Instant createdAt) {
     this.id = id;
     this.type = type;
     this.body = body;
+    this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -104,8 +110,23 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
     case 0: return id;
     case 1: return type;
     case 2: return body;
+    case 3: return createdAt;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  private static final org.apache.avro.Conversion<?>[] conversions =
+      new org.apache.avro.Conversion<?>[] {
+      null,
+      null,
+      null,
+      new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
+      null
+  };
+
+  @Override
+  public org.apache.avro.Conversion<?> getConversion(int field) {
+    return conversions[field];
   }
 
   // Used by DatumReader.  Applications should not call.
@@ -115,6 +136,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
     case 0: id = (java.lang.CharSequence)value$; break;
     case 1: type = (java.lang.CharSequence)value$; break;
     case 2: body = (java.lang.CharSequence)value$; break;
+    case 3: createdAt = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -171,6 +193,23 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
   }
 
   /**
+   * Gets the value of the 'createdAt' field.
+   * @return The value of the 'createdAt' field.
+   */
+  public java.time.Instant getCreatedAt() {
+    return createdAt;
+  }
+
+
+  /**
+   * Sets the value of the 'createdAt' field.
+   * @param value the value to set.
+   */
+  public void setCreatedAt(java.time.Instant value) {
+    this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+  }
+
+  /**
    * Creates a new NewMessageEvent RecordBuilder.
    * @return A new NewMessageEvent RecordBuilder
    */
@@ -214,6 +253,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
     private java.lang.CharSequence id;
     private java.lang.CharSequence type;
     private java.lang.CharSequence body;
+    private java.time.Instant createdAt;
 
     /** Creates a new Builder */
     private Builder() {
@@ -238,6 +278,10 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
         this.body = data().deepCopy(fields()[2].schema(), other.body);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
+      if (isValidValue(fields()[3], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[3].schema(), other.createdAt);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
     }
 
     /**
@@ -257,6 +301,10 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
       if (isValidValue(fields()[2], other.body)) {
         this.body = data().deepCopy(fields()[2].schema(), other.body);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.createdAt)) {
+        this.createdAt = data().deepCopy(fields()[3].schema(), other.createdAt);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -380,6 +428,45 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
       return this;
     }
 
+    /**
+      * Gets the value of the 'createdAt' field.
+      * @return The value.
+      */
+    public java.time.Instant getCreatedAt() {
+      return createdAt;
+    }
+
+
+    /**
+      * Sets the value of the 'createdAt' field.
+      * @param value The value of 'createdAt'.
+      * @return This builder.
+      */
+    public com.example.dto.kafka.NewMessageEvent.Builder setCreatedAt(java.time.Instant value) {
+      validate(fields()[3], value);
+      this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'createdAt' field has been set.
+      * @return True if the 'createdAt' field has been set, false otherwise.
+      */
+    public boolean hasCreatedAt() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'createdAt' field.
+      * @return This builder.
+      */
+    public com.example.dto.kafka.NewMessageEvent.Builder clearCreatedAt() {
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public NewMessageEvent build() {
@@ -388,6 +475,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.type = fieldSetFlags()[1] ? this.type : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.body = fieldSetFlags()[2] ? this.body : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.createdAt = fieldSetFlags()[3] ? this.createdAt : (java.time.Instant) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -415,51 +503,6 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
     READER$.read(this, SpecificData.getDecoder(in));
   }
 
-  @Override protected boolean hasCustomCoders() { return true; }
-
-  @Override public void customEncode(org.apache.avro.io.Encoder out)
-    throws java.io.IOException
-  {
-    out.writeString(this.id);
-
-    out.writeString(this.type);
-
-    out.writeString(this.body);
-
-  }
-
-  @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
-    throws java.io.IOException
-  {
-    org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
-    if (fieldOrder == null) {
-      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
-
-      this.type = in.readString(this.type instanceof Utf8 ? (Utf8)this.type : null);
-
-      this.body = in.readString(this.body instanceof Utf8 ? (Utf8)this.body : null);
-
-    } else {
-      for (int i = 0; i < 3; i++) {
-        switch (fieldOrder[i].pos()) {
-        case 0:
-          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
-          break;
-
-        case 1:
-          this.type = in.readString(this.type instanceof Utf8 ? (Utf8)this.type : null);
-          break;
-
-        case 2:
-          this.body = in.readString(this.body instanceof Utf8 ? (Utf8)this.body : null);
-          break;
-
-        default:
-          throw new java.io.IOException("Corrupt ResolvingDecoder.");
-        }
-      }
-    }
-  }
 }
 
 
