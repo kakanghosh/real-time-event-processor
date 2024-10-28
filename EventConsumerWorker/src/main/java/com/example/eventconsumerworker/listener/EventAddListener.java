@@ -11,7 +11,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EventAddListener {
 
-    @KafkaListener(topics = Topics.PRODUCT_EVENT_ADDED, groupId = "${spring.kafka.consumer-group}")
+    @KafkaListener(
+            topics = Topics.PRODUCT_EVENT_ADDED,
+            groupId = "${spring.kafka.consumer-group}",
+            containerFactory = "kafkaListenerContainerFactory",
+            concurrency = "2"
+    )
     public void consume(ConsumerRecord<String, NewMessageEvent> record) {
         NewMessageEvent event = record.value();
         log.info("Consumed event: ID= {}, Type= {}, Body= {}", event.getId(), event.getType(), event.getBody());
