@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4817277540843988750L;
+  private static final long serialVersionUID = -7956180195852507048L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewMessageEvent\",\"namespace\":\"com.example.dto.kafka\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"body\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NewMessageEvent\",\"namespace\":\"com.example.dto.kafka\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"body\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,7 +73,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
     return DECODER.decode(b);
   }
 
-  private long id;
+  private java.lang.CharSequence id;
   private java.lang.CharSequence type;
   private java.lang.CharSequence body;
 
@@ -90,7 +90,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
    * @param type The new value for type
    * @param body The new value for body
    */
-  public NewMessageEvent(java.lang.Long id, java.lang.CharSequence type, java.lang.CharSequence body) {
+  public NewMessageEvent(java.lang.CharSequence id, java.lang.CharSequence type, java.lang.CharSequence body) {
     this.id = id;
     this.type = type;
     this.body = body;
@@ -112,7 +112,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = (java.lang.Long)value$; break;
+    case 0: id = (java.lang.CharSequence)value$; break;
     case 1: type = (java.lang.CharSequence)value$; break;
     case 2: body = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
@@ -123,7 +123,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public long getId() {
+  public java.lang.CharSequence getId() {
     return id;
   }
 
@@ -132,7 +132,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(long value) {
+  public void setId(java.lang.CharSequence value) {
     this.id = value;
   }
 
@@ -211,7 +211,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<NewMessageEvent>
     implements org.apache.avro.data.RecordBuilder<NewMessageEvent> {
 
-    private long id;
+    private java.lang.CharSequence id;
     private java.lang.CharSequence type;
     private java.lang.CharSequence body;
 
@@ -264,7 +264,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public long getId() {
+    public java.lang.CharSequence getId() {
       return id;
     }
 
@@ -274,7 +274,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.example.dto.kafka.NewMessageEvent.Builder setId(long value) {
+    public com.example.dto.kafka.NewMessageEvent.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -295,6 +295,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
       * @return This builder.
       */
     public com.example.dto.kafka.NewMessageEvent.Builder clearId() {
+      id = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -384,7 +385,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
     public NewMessageEvent build() {
       try {
         NewMessageEvent record = new NewMessageEvent();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.Long) defaultValue(fields()[0]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.type = fieldSetFlags()[1] ? this.type : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.body = fieldSetFlags()[2] ? this.body : (java.lang.CharSequence) defaultValue(fields()[2]);
         return record;
@@ -419,7 +420,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    out.writeLong(this.id);
+    out.writeString(this.id);
 
     out.writeString(this.type);
 
@@ -432,7 +433,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      this.id = in.readLong();
+      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
 
       this.type = in.readString(this.type instanceof Utf8 ? (Utf8)this.type : null);
 
@@ -442,7 +443,7 @@ public class NewMessageEvent extends org.apache.avro.specific.SpecificRecordBase
       for (int i = 0; i < 3; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.id = in.readLong();
+          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
           break;
 
         case 1:
