@@ -2,7 +2,7 @@ FROM openjdk:17-jdk-alpine
 
 WORKDIR /app
 
-COPY target/EventProducerWeb-*-SNAPSHOT.jar app.jar
+COPY EventProducerWeb/target/EventProducerWeb-*-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
