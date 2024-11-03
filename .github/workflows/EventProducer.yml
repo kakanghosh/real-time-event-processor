@@ -56,7 +56,7 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Build Docker image with commit SHA tag
-        run: docker build -t ghoshdocker/event-producer:${{ github.sha }} -f EventProducerWeb/pom.xml .
+        run: docker build -t ghoshdocker/event-producer:4-11-2024 -f EventProducerWeb/Dockerfile .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
