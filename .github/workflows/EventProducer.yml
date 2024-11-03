@@ -1,7 +1,6 @@
 name: Event Producer Workflow
 
 on:
-  push:
   pull_request:
   workflow_dispatch:
 
